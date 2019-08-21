@@ -109,7 +109,7 @@ def FrameCapture(path):
 		
 		#break
 	cap.release()
-	#cv2.destroyAllWindows()
+	
 
   
 # Driver Code 
