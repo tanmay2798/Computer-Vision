@@ -44,8 +44,8 @@ def FrameCapture(path):
 		abs_grad_x = cv2.convertScaleAbs(grad_x)
 		abs_grad_y = cv2.convertScaleAbs(grad_y)
 		grad = cv2.addWeighted(abs_grad_x, 0.5, abs_grad_y, 0.5, 0)
-		edges = cv2.Canny(grad,50,150,apertureSize = 7)
-		lines = cv2.HoughLinesP(grad,1,np.pi/180,280)
+		edges = cv2.Canny(grad,50,150,apertureSize = 3)
+		lines = cv2.HoughLinesP(grad,1,np.pi/180,280,minLineLength = 200, maxLineGap = 10)
 		print lines
 
 		if lines is not None:
@@ -66,6 +66,7 @@ def FrameCapture(path):
 				y1.append(l[0][1])
 				x2.append(l[0][2])
 				y2.append(l[0][3])
+				#frame = cv2.line(frame,(l[0][0],l[0][1]),(l[0][2],l[0][3]),(0,255,0),2)
 			avgx1=sum(x1)/len(x1)
 			avgx2=sum(x2)/len(x2)
 			avgy1=sum(y1)/len(y1)
@@ -78,7 +79,7 @@ def FrameCapture(path):
 		#	frame = cv2.line(frame,((max(x1)+min(x1))/2,(max(y1)+min(y1))/2),((max(x2)+min(x2))/2,(max(y2)+min(y2))/2),(0,255,0),5)
 			#frame = cv2.line(frame,(avgx1+100*slope,avgy1+100*slope),(avgx2-100*slope,avgy2-100*slope),(0,255,0),5)
 			
-			frame = cv2.line(frame,(avgx1,avgy1),(avgx2,avgy2),(255,0,0),2)
+			#frame = cv2.line(frame,(avgx1,avgy1),(avgx2,avgy2),(255,0,0),4)
 			print m
 			#frame = cv2.line(frame,(avgx2+500,m*500+avgy2),(avgx2-1000,avgy2-1000*m),(0,255,0),5)
 			frame = cv2.line(frame,(fx+1000,m*1000+fy),(fx-1000,fy-1000*m),(255,0,0),5)
@@ -105,7 +106,7 @@ def FrameCapture(path):
 		    break
 		#cv2.imshow('edges',edges)
 		cv2.imshow('frame',frame)
-		cv2.imshow('g',edges)
+		#cv2.imshow('g',edges)
 		
 		#break
 	cap.release()
