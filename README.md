@@ -2,7 +2,9 @@
 
 ## Course Contents
 
-Camera model. Calibration, multi-views projective geometry and invariants. • Feature detection, correspondence and tracking.
+Camera model. Calibration, multi-views projective geometry and invariants.
+
+Feature detection, correspondence and tracking.
 
 3D structure/motion estimation.
 
